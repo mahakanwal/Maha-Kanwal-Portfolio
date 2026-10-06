@@ -157,7 +157,7 @@ export const projects = [
     tagline: 'Generative-AI onboarding platform that turns a role into a personalised learning sprint.',
     tags: ['React', 'FastAPI', 'PostgreSQL', 'Groq GenAI'],
     image: null,
-    cover: { accent: '#ff3e81', glyph: 'AI' },
+    cover: { accent: 'var(--p)', glyph: 'AI' },
     live: 'https://skill-sprint-omega-six.vercel.app/',
     github: null // TODO: add GitHub repo link
   },
@@ -168,7 +168,7 @@ export const projects = [
     tagline: 'AI-powered project - full case study coming soon.',
     tags: ['AI', 'React', 'Python'],
     image: null,
-    cover: { accent: '#ff7eb3', glyph: 'SS' },
+    cover: { accent: 'rgb(var(--p300))', glyph: 'SS' },
     live: null,
     github: null
   },
@@ -215,7 +215,7 @@ export const projects = [
     tagline: 'WhatsApp-style real-time chatting app - one-to-one chats, instant messages and a clean mobile UI.',
     tags: ['Mobile App', 'Real-time Chat'],
     image: null,
-    phone: { accent: '#ff3e81', ui: 'chat', screen: null }, // screen: '/img/your-app-screenshot.webp'
+    phone: { accent: 'var(--p)', ui: 'chat', screen: null }, // screen: '/img/your-app-screenshot.webp'
     live: null, // TODO
     github: null // TODO
   },
@@ -225,7 +225,7 @@ export const projects = [
     tagline: 'Laptop shopping mobile app - browse, compare and order laptops from one place.',
     tags: ['Mobile App', 'Flutter', 'E-commerce'],
     image: null,
-    phone: { accent: '#ff7eb3', ui: 'shop', screen: null }, // screen: '/img/your-app-screenshot.webp'
+    phone: { accent: 'rgb(var(--p300))', ui: 'shop', screen: null }, // screen: '/img/your-app-screenshot.webp'
     live: null, // TODO
     github: null // TODO
   }
@@ -240,19 +240,7 @@ export const aboutStats = [
 
 // ---------------------------------------------------------------
 // "Off The Clock" section
-// `artist` can be left empty. `link` opens a YouTube search - swap in a direct video link if you like.
-// (`link` can be a YouTube / Spotify URL, or leave null)
 // ---------------------------------------------------------------
-export const favoriteSongs = [
-  { title: 'Humnava', artist: 'Hamari Adhuri Kahani', link: 'https://www.youtube.com/results?search_query=Humnava+Hamari+Adhuri+Kahani' },
-  { title: 'Dooron Dooron', artist: '', link: 'https://www.youtube.com/results?search_query=Dooron+Dooron+song' },
-  { title: 'By My Side', artist: '', link: 'https://www.youtube.com/results?search_query=By+My+Side+song' },
-  { title: 'Afsos', artist: '', link: 'https://www.youtube.com/results?search_query=Afsos+song' },
-  { title: 'Hum', artist: '', link: 'https://www.youtube.com/results?search_query=Hum+song' },
-  { title: 'Kahani Meri', artist: 'Kaifi Khalil', link: 'https://www.youtube.com/results?search_query=Kahani+Meri+Kaifi+Khalil' },
-  { title: 'Tera Hi Rahon', artist: '', link: 'https://www.youtube.com/results?search_query=Tera+Hi+Rahon+song' }
-];
-
 export const creativeSides = [
   { title: 'Graphic Design', text: 'Posters, brand visuals and UI layouts - design is where my logic gets its colour.' },
   { title: 'Nature & Mountains', text: 'A mountain soul at heart. Fresh air and long views reset my creativity.' },

@@ -151,7 +151,7 @@ const GooeyNav = ({
             transition: color 0.3s ease;
           }
           .effect.text.active {
-            color: white;
+            color: rgb(var(--on-p-rgb));
           }
           .effect.filter {
             filter: blur(7px) contrast(100) blur(0);
@@ -168,7 +168,7 @@ const GooeyNav = ({
             content: "";
             position: absolute;
             inset: 0;
-            background: #ff3e81;
+            background: var(--p);
             transform: scale(0);
             opacity: 0;
             z-index: -1;
@@ -251,7 +251,7 @@ const GooeyNav = ({
             }
           }
           .gooey-nav li.active {
-            color: white;
+            color: rgb(var(--on-p-rgb));
             text-shadow: none;
           }
           .gooey-nav li.active::after {
@@ -263,7 +263,7 @@ const GooeyNav = ({
             position: absolute;
             inset: 0;
             border-radius: 8px;
-            background: #ff3e81;
+            background: var(--p);
             opacity: 0;
             transform: scale(0);
             transition: all 0.3s ease;

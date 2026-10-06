@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Icon from './Icon';
 import Logo from './Logo';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const navLinks = [
   { href: '#about', label: 'Bio' },
@@ -45,9 +46,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
+          <ThemeSwitcher />
           <a href="#contact" className="group relative flex items-center">
-            <span className="absolute -inset-2 bg-pink-500/20 rounded-full blur opacity-0 group-hover:opacity-100 transition" />
-            <span className="relative text-[9px] uppercase font-bold tracking-[0.2em] text-mahiPink border border-[#ff3e81] px-3 py-1 rounded-md group-hover:bg-pink-500 group-hover:text-white transition-all">
+            <span className="relative text-[9px] uppercase font-bold tracking-[0.2em] text-mahiPink border border-mahiPink px-3 py-1 rounded-md group-hover:bg-mahiPink group-hover:text-onAccent transition-all">
               Hire
             </span>
           </a>

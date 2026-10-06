@@ -45,7 +45,7 @@ export default function Education() {
             </div>
 
             <div className="reveal-3d md:col-span-4">
-              <TiltCard max={10} glow="rgba(255,255,255,0.18)" className="h-full bg-gradient-to-br from-pink-600 to-pink-800 rounded-xl p-8 text-white flex flex-col justify-between border border-pink-400/30 shadow-[0_20px_60px_rgba(255,62,129,0.35)]">
+              <TiltCard max={10} glow="rgba(255,255,255,0.18)" className="h-full bg-gradient-to-br from-pink-600 to-pink-800 rounded-xl p-8 text-white flex flex-col justify-between border border-pink-400/30 shadow-[0_20px_50px_-24px_rgb(var(--p-rgb)/0.35)]">
                 <div className="[transform:translateZ(45px)]">
                   <span className="text-white text-[10px] font-semibold tracking-widest mb-6 block opacity-80 uppercase">Top Certifications</span>
                   <div className="space-y-6 pb-6">

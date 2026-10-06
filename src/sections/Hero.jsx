@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import TechText from '../components/reactbits/TechText';
 import Icon from '../components/Icon';
+import { useTheme } from '../theme/ThemeContext';
 
 // Original typewriter (same words, speeds and pause as the first version of the site)
 const words = ['Full Stack Developer', 'Web Instructor', 'Freelance Maven', 'Nature Soul'];
@@ -36,6 +37,7 @@ function Typewriter() {
 
 // Hero - restored to the original design.
 export default function Hero() {
+  const { theme } = useTheme();
   return (
     <section id="top" className="h-screen flex items-center justify-center relative overflow-hidden">
       <div className="hero-mask" />
@@ -58,7 +60,7 @@ export default function Hero() {
                 fontSize={400}
                 letterSpacing={0.01}
                 color="#ffffff"
-                accentColor="#ff3e81"
+                accentColor={theme.p}
                 reach={180}
                 dashLength={5}
                 dashGap={3}

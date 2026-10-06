@@ -51,7 +51,7 @@ export default function Loader() {
       <div ref={loaderRef} className="fixed inset-0 z-[10001] bg-[#050505] flex items-center justify-center">
         <div className="relative flex flex-col items-center">
           <div className="w-12 h-12 border-2 border-pink-500/20 border-t-pink-500 rounded-full animate-spin" />
-          <div className="absolute inset-0 m-auto w-2 h-2 bg-pink-500 rounded-full shadow-[0_0_15px_#ff3e81]" />
+          <div className="absolute inset-0 m-auto w-2 h-2 bg-pink-500 rounded-full shadow-[0_0_8px_rgb(var(--p-rgb)/0.45)]" />
           <span className="mt-4 text-[8px] tracking-[0.5em] text-mahiPink animate-pulse uppercase">Syncing...</span>
         </div>
       </div>

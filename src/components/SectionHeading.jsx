@@ -30,7 +30,7 @@ export default function SectionHeading({ title, outline, children, className = '
     <div ref={ref} className={`space-y-6 pb-10 text-center max-w-4xl mx-auto [perspective:900px] ${className}`}>
       <h2 className="sh-anim text-4xl md:text-5xl font-black capitalize text-white">
         {title}
-        <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #ff3e81' }}>
+        <span className="text-transparent" style={{ WebkitTextStroke: '1.5px var(--p)' }}>
           {' '}
           {outline}
         </span>
@@ -38,7 +38,7 @@ export default function SectionHeading({ title, outline, children, className = '
       {children && <p className={`sh-anim text-white/90 leading-relaxed mx-auto ${textClass}`}>{children}</p>}
       <div className="sh-anim flex items-center justify-center gap-4 pt-4">
         <div className="h-[1px] w-12 bg-pink-600/30" />
-        <div className="w-2 h-2 rounded-full bg-pink-600 shadow-[0_0_10px_#ff3e81]" />
+        <div className="w-2 h-2 rounded-full bg-mahiPink" />
         <div className="h-[1px] w-12 bg-pink-600/30" />
       </div>
     </div>

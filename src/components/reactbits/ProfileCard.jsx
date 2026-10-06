@@ -568,7 +568,7 @@ const ProfileCardComponent = ({
                   className="font-semibold m-0"
                   style={{
                     fontSize: 'min(5svh, 3em)',
-                    backgroundImage: 'linear-gradient(to bottom, #fff, #ff7eb3)',
+                    backgroundImage: 'linear-gradient(to bottom, #fff, rgb(var(--p300)))',
                     backgroundSize: '1em 1.5em',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -588,7 +588,7 @@ const ProfileCardComponent = ({
                     top: '-12px',
                     fontSize: '16px',
                     margin: '0 auto',
-                    backgroundImage: 'linear-gradient(to bottom, #fff, #ff3e81)',
+                    backgroundImage: 'linear-gradient(to bottom, #fff, var(--p))',
                     backgroundSize: '1em 1.5em',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',

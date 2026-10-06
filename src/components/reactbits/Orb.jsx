@@ -7,9 +7,13 @@ export default function Orb({
   hoverIntensity = 0.2,
   rotateOnHover = true,
   forceHoverState = false,
-  backgroundColor = '#000000'
+  backgroundColor = '#000000',
+  // patched: theme colours [main, soft, deep] - updated live without re-creating the scene
+  colors = ['#ff3e81', '#ffb8d1', '#b0124f']
 }) {
   const ctnDom = useRef(null);
+  const colorsRef = useRef(colors);
+  colorsRef.current = colors;
 
   const vert = /* glsl */ `
     precision highp float;
@@ -101,10 +105,10 @@ export default function Orb({
       return vec4(colorIn.rgb / (a + 1e-5), a);
     }
 
-    // patched: portfolio pink palette (#ff3e81, #ffb8d1, deep rose)
-    const vec3 baseColor1 = vec3(1.0, 0.243137, 0.505882);
-    const vec3 baseColor2 = vec3(1.0, 0.721569, 0.819608);
-    const vec3 baseColor3 = vec3(0.45, 0.02, 0.18);
+    // patched: theme palette passed in as uniforms
+    uniform vec3 baseColor1;
+    uniform vec3 baseColor2;
+    uniform vec3 baseColor3;
     const float innerRadius = 0.6;
     const float noiseScale = 0.65;
 
@@ -205,7 +209,10 @@ export default function Orb({
         hover: { value: 0 },
         rot: { value: 0 },
         hoverIntensity: { value: hoverIntensity },
-        backgroundColor: { value: hexToVec3(backgroundColor) }
+        backgroundColor: { value: hexToVec3(backgroundColor) },
+        baseColor1: { value: hexToVec3(colorsRef.current[0]) },
+        baseColor2: { value: hexToVec3(colorsRef.current[1]) },
+        baseColor3: { value: hexToVec3(colorsRef.current[2]).multiply(0.65) }
       }
     });
 
@@ -264,6 +271,10 @@ export default function Orb({
       program.uniforms.hue.value = hue;
       program.uniforms.hoverIntensity.value = hoverIntensity;
       program.uniforms.backgroundColor.value = hexToVec3(backgroundColor);
+      const [c1, c2, c3] = colorsRef.current;
+      program.uniforms.baseColor1.value = hexToVec3(c1);
+      program.uniforms.baseColor2.value = hexToVec3(c2);
+      program.uniforms.baseColor3.value = hexToVec3(c3).multiply(0.65);
 
       const effectiveHover = forceHoverState ? 1 : targetHover;
       program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;

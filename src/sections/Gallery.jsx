@@ -13,7 +13,7 @@ export default function Gallery() {
         </SectionHeading>
       </div>
       <div className="relative">
-        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2/3 bg-[radial-gradient(ellipse_at_center,rgba(255,62,129,0.18),transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2/3 bg-[radial-gradient(ellipse_at_center,rgb(var(--p-rgb)/0.12),transparent_70%)] pointer-events-none" />
         <LazyMount className="relative h-[420px] sm:h-[560px]" rootMargin="0px">
           <CircularGallery
             items={galleryItems}

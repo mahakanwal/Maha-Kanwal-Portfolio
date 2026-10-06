@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 
-// 3D perspective tilt card with a pink spotlight that follows the pointer.
+// 3D perspective tilt card with a soft accent spotlight that follows the pointer.
 // Children can use `style={{ transform: 'translateZ(40px)' }}` to pop out in depth.
 export default function TiltCard({
   children,
   className = '',
   max = 10,
   scale = 1.02,
-  glow = 'rgba(255, 62, 129, 0.22)',
+  glow = 'rgb(var(--p-rgb) / 0.12)',
   as: Tag = 'div',
   ...rest
 }) {

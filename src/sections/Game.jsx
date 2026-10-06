@@ -2,13 +2,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import GlitchText from '../components/reactbits/GlitchText';
 import SectionHeading from '../components/SectionHeading';
 import Icon from '../components/Icon';
+import { currentTheme, hexToRgb01 } from '../theme/themes';
 
 // ---------------------------------------------------------------
 // BUG HUNTER - a small arcade shooter, playable right inside the page.
 // Move: mouse / touch drag / arrow keys / A-D.  Auto-fire.  P = pause.
 // ---------------------------------------------------------------
 
-const PINK = '#ff3e81';
+// colours follow the active site theme
+const accent = () => currentTheme().p;
+const soft = () => currentTheme().s;
+const accentRgba = a => `rgba(${hexToRgb01(currentTheme().p).map(v => Math.round(v * 255)).join(',')},${a})`;
 const BEST_KEY = 'mahi-bug-hunter-best';
 
 const readBest = () => {
@@ -27,9 +31,9 @@ const writeBest = v => {
 };
 
 const BUG_TYPES = {
-  basic: { hp: 1, r: 14, speed: 1, color: '#ff3e81', score: 10 },
-  fast: { hp: 1, r: 10, speed: 1.9, color: '#ffb8d1', score: 15 },
-  tank: { hp: 4, r: 21, speed: 0.6, color: '#e0136a', score: 40 }
+  basic: { hp: 1, r: 14, speed: 1, get color() { return currentTheme().p; }, score: 10 },
+  fast: { hp: 1, r: 10, speed: 1.9, get color() { return currentTheme().s; }, score: 15 },
+  tank: { hp: 4, r: 21, speed: 0.6, get color() { return currentTheme().p600; }, score: 40 }
 };
 
 function makeState(w, h) {
@@ -62,8 +66,8 @@ function drawShip(ctx, p, t) {
   // thruster
   const flame = 10 + Math.sin(t * 0.6) * 4;
   const g = ctx.createLinearGradient(x, y + 12, x, y + 12 + flame + 10);
-  g.addColorStop(0, 'rgba(255,184,209,0.95)');
-  g.addColorStop(1, 'rgba(255,62,129,0)');
+  g.addColorStop(0, soft());
+  g.addColorStop(1, accentRgba(0));
   ctx.fillStyle = g;
   ctx.beginPath();
   ctx.moveTo(x - 7, y + 12);
@@ -72,10 +76,10 @@ function drawShip(ctx, p, t) {
   ctx.closePath();
   ctx.fill();
   // body
-  ctx.shadowColor = PINK;
-  ctx.shadowBlur = 18;
+  ctx.shadowColor = accent();
+  ctx.shadowBlur = 10;
   ctx.fillStyle = '#16090f';
-  ctx.strokeStyle = PINK;
+  ctx.strokeStyle = accent();
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(x, y - 22);
@@ -89,7 +93,7 @@ function drawShip(ctx, p, t) {
   ctx.stroke();
   // cockpit
   ctx.shadowBlur = 10;
-  ctx.fillStyle = '#ffb8d1';
+  ctx.fillStyle = soft();
   ctx.beginPath();
   ctx.ellipse(x, y - 3, 3.5, 7, 0, 0, Math.PI * 2);
   ctx.fill();
@@ -125,7 +129,7 @@ function drawBug(ctx, b, t) {
   ctx.stroke();
   // body
   ctx.shadowColor = type.color;
-  ctx.shadowBlur = 14;
+  ctx.shadowBlur = 8;
   ctx.fillStyle = b.flash > 0 ? '#ffffff' : '#12070d';
   ctx.beginPath();
   ctx.ellipse(0, 0, r * 0.7, r * 0.9, 0, 0, Math.PI * 2);
@@ -154,7 +158,7 @@ function drawCoffee(ctx, d, t) {
   ctx.save();
   ctx.translate(d.x, d.y + Math.sin(t * 0.1) * 3);
   ctx.shadowColor = '#7df9ff';
-  ctx.shadowBlur = 16;
+  ctx.shadowBlur = 9;
   ctx.strokeStyle = '#7df9ff';
   ctx.fillStyle = 'rgba(125,249,255,0.15)';
   ctx.lineWidth = 2;
@@ -373,7 +377,7 @@ export default function Game() {
 
       if (s.lives <= 0) {
         s.lives = 0;
-        burst(s, p.x, p.y, PINK, 40);
+        burst(s, p.x, p.y, accent(), 40);
         const b = readBest();
         if (s.score > b) {
           writeBest(s.score);
@@ -405,11 +409,11 @@ export default function Game() {
       const horizon = h * 0.62;
       ctx.save();
       const fade = ctx.createLinearGradient(0, horizon, 0, h);
-      fade.addColorStop(0, 'rgba(255,62,129,0)');
-      fade.addColorStop(1, 'rgba(255,62,129,0.12)');
+      fade.addColorStop(0, accentRgba(0));
+      fade.addColorStop(1, accentRgba(0.12));
       ctx.fillStyle = fade;
       ctx.fillRect(0, horizon, w, h - horizon);
-      ctx.strokeStyle = 'rgba(255,62,129,0.22)';
+      ctx.strokeStyle = accentRgba(0.22);
       ctx.lineWidth = 1;
       const vx = w / 2;
       for (let i = -14; i <= 14; i++) {
@@ -434,9 +438,9 @@ export default function Game() {
 
       // bullets
       ctx.save();
-      ctx.shadowColor = PINK;
+      ctx.shadowColor = accent();
       ctx.shadowBlur = 10;
-      ctx.fillStyle = s.triple > 0 ? '#7df9ff' : '#ffd1e3';
+      ctx.fillStyle = s.triple > 0 ? '#7df9ff' : soft();
       s.bullets.forEach(b => {
         ctx.beginPath();
         ctx.roundRect(b.x - 2, b.y - 8, 4, 14, 2);

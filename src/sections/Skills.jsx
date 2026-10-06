@@ -3,6 +3,7 @@ import DotGrid from '../components/reactbits/DotGrid';
 import LazyMount from '../components/LazyMount';
 import Icon from '../components/Icon';
 import { skills } from '../data/portfolio';
+import { useTheme } from '../theme/ThemeContext';
 
 const total = skills.length;
 const step = 360 / total;
@@ -17,6 +18,7 @@ const SkillGlyph = ({ skill, size }) =>
 // "Beyond the Interface" skills orbit - same behaviour as the original,
 // rewritten in React, plus a React Bits DotGrid background.
 export default function Skills() {
+  const { theme } = useTheme();
   const [index, setIndex] = useState(0); // active orbit item
   const [shown, setShown] = useState(skills[0]); // skill displayed in the centre
   const [visible, setVisible] = useState(false); // stagger "show" state
@@ -52,8 +54,8 @@ export default function Skills() {
         <DotGrid
           dotSize={4}
           gap={26}
-          baseColor="#2a1520"
-          activeColor="#ff3e81"
+          baseColor={theme.dim}
+          activeColor={theme.p}
           proximity={130}
           shockRadius={220}
           shockStrength={4}
@@ -66,7 +68,7 @@ export default function Skills() {
       <div className="relative z-10 space-y-4 py-10 text-center max-w-4xl">
         <h2 className="text-4xl md:text-5xl font-black capitalize text-white">
           Beyond_the
-          <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #ff3e81' }}>
+          <span className="text-transparent" style={{ WebkitTextStroke: '1.5px var(--p)' }}>
             Interface
           </span>
         </h2>
@@ -76,7 +78,7 @@ export default function Skills() {
         </p>
         <div className="flex items-center justify-center gap-4 pt-4">
           <div className="h-[1px] w-12 bg-pink-600/30" />
-          <div className="w-2 h-2 rounded-full bg-pink-600 shadow-[0_0_10px_#ff3e81]" />
+          <div className="w-2 h-2 rounded-full bg-mahiPink" />
           <div className="h-[1px] w-12 bg-pink-600/30" />
         </div>
       </div>

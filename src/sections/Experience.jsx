@@ -1,10 +1,12 @@
 import Threads from '../components/reactbits/Threads';
 import LazyMount from '../components/LazyMount';
 import SectionHeading from '../components/SectionHeading';
+import { useTheme } from '../theme/ThemeContext';
+import { hexToRgb01 } from '../theme/themes';
 import { experience } from '../data/portfolio';
 
 const Card = ({ item, className = '' }) => (
-  <div className={`bg-[#1e1e21] p-4 rounded-xl border-l-[8px] border-[#ff4d6d] z-20 shadow-2xl ${className}`}>
+  <div className={`bg-[#1e1e21] p-4 rounded-xl border-l-[8px] border-mahiPink z-20 shadow-2xl ${className}`}>
     <span className="card-tag">{item.tag}</span>
     <h3 className="card-title">{item.title}</h3>
     <span className="card-subtitle">{item.sub}</span>
@@ -15,12 +17,13 @@ const Card = ({ item, className = '' }) => (
 // background was added. Small screens get a stacked version of the same cards.
 export default function Experience() {
   const [l1, l2, l3, r1, r2, r3] = experience;
+  const { theme } = useTheme();
 
   return (
     <section id="exp" className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-4 overflow-hidden">
       {/* React Bits: Threads background */}
       <LazyMount className="absolute inset-0 z-0 opacity-70 pointer-events-none">
-        <Threads color={[1, 0.24, 0.5]} amplitude={1.2} distance={0.2} enableMouseInteraction />
+        <Threads color={hexToRgb01(theme.p)} amplitude={1.2} distance={0.2} enableMouseInteraction />
       </LazyMount>
       <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#030303_85%)] pointer-events-none" />
 
@@ -32,7 +35,7 @@ export default function Experience() {
       {/* Desktop - original layout */}
       <div className="hidden lg:flex relative w-[900px] h-[100vh] items-center justify-center z-10">
         <div className="relative">
-          <div className="w-72 h-72 rounded-full border-4 border-[#ff4d6d] p-3 glow-ring bg-[#121214]">
+          <div className="w-72 h-72 rounded-full border-4 border-mahiPink p-3 glow-ring bg-[#121214]">
             <div className="w-full h-full rounded-full overflow-hidden bg-gray-800">
               <img src="/img/maha-edu.webp" alt="Maha Kanwal" className="h-[400px] w-[600px] object-cover" />
             </div>
@@ -72,13 +75,13 @@ export default function Experience() {
 
       {/* Mobile / tablet - same cards, stacked */}
       <div className="lg:hidden relative z-10 w-full max-w-md mx-auto py-14">
-        <div className="mx-auto mb-12 w-52 h-52 rounded-full border-4 border-[#ff4d6d] p-2.5 glow-ring bg-[#121214]">
+        <div className="mx-auto mb-12 w-52 h-52 rounded-full border-4 border-mahiPink p-2.5 glow-ring bg-[#121214]">
           <div className="w-full h-full rounded-full overflow-hidden bg-gray-800">
             <img src="/img/maha-edu.webp" alt="Maha Kanwal" className="w-full h-full object-cover object-top" />
           </div>
         </div>
         <div className="relative pl-8">
-          <div className="absolute left-2.5 top-2 bottom-2 border-l-2 border-dashed border-[#ff3e81]/80" />
+          <div className="absolute left-2.5 top-2 bottom-2 border-l-2 border-dashed border-mahiPink/80" />
           {experience.map(item => (
             <div key={item.title + item.sub} className="relative mb-5">
               <div className="dot !left-[-21px] top-1/2" />

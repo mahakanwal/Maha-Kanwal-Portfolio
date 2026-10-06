@@ -4,7 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        mahiPink: '#ff3e81'
+        // theme-driven accent (see src/theme/themes.js)
+        mahiPink: 'rgb(var(--p-rgb) / <alpha-value>)',
+        onAccent: 'rgb(var(--on-p-rgb) / <alpha-value>)',
+        pink: {
+          300: 'rgb(var(--p300) / <alpha-value>)',
+          400: 'rgb(var(--p400) / <alpha-value>)',
+          500: 'rgb(var(--p500) / <alpha-value>)',
+          600: 'rgb(var(--p600) / <alpha-value>)',
+          800: 'rgb(var(--p800) / <alpha-value>)'
+        }
       },
       keyframes: {
         glitch: {

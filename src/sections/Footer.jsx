@@ -5,7 +5,7 @@ import Logo from '../components/Logo';
 export default function Footer() {
   return (
     <footer className="relative z-10 bg-[#050505] px-4 pt-14 pb-10 text-center overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_at_top,rgba(255,62,129,0.12),transparent_70%)] pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(ellipse_at_top,rgb(var(--p-rgb)/0.08),transparent_70%)] pointer-events-none" />
 
       <div className="relative flex flex-col items-center gap-5">
         <span className="footer-save">

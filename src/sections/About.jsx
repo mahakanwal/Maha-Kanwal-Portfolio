@@ -1,14 +1,17 @@
 import Galaxy from '../components/reactbits/Galaxy';
 import LazyMount from '../components/LazyMount';
+import { useTheme } from '../theme/ThemeContext';
 
 // About - restored to the original design, with the React Bits Galaxy background behind it.
 export default function About() {
+  const { theme } = useTheme();
   return (
     <section id="about" className="relative overflow-hidden">
       <LazyMount className="absolute inset-0 z-0" rootMargin="100px">
         <Galaxy
-          hueShift={330}
-          saturation={0.75}
+          key={theme.id}
+          hueShift={theme.galaxyHue}
+          saturation={theme.galaxySat}
           density={1.1}
           glowIntensity={0.35}
           twinkleIntensity={0.4}
@@ -27,7 +30,7 @@ export default function About() {
         <div className="space-y-6 pb-10 text-center max-w-4xl mx-auto">
           <h2 className="text-5xl md:text-5xl font-black capitalize text-white">
             The Creative
-            <span className="text-transparent" style={{ WebkitTextStroke: '1.5px #ff3e81' }}>
+            <span className="text-transparent" style={{ WebkitTextStroke: '1.5px var(--p)' }}>
               {' '}
               Engine
             </span>
@@ -35,7 +38,7 @@ export default function About() {
           <p className="text-[10px] md:text-xs">Part engineer, part designer. I build systems that perform as good as they look.</p>
           <div className="flex items-center justify-center gap-4 pt-4">
             <div className="h-[1px] w-12 bg-pink-600/30" />
-            <div className="w-2 h-2 rounded-full bg-pink-600 shadow-[0_0_10px_#ff3e81]" />
+            <div className="w-2 h-2 rounded-full bg-mahiPink" />
             <div className="h-[1px] w-12 bg-pink-600/30" />
           </div>
         </div>
@@ -46,7 +49,7 @@ export default function About() {
               <div className="splatter-blob">
                 <img src="/img/maha.webp" alt="Mahi" className="blob-img" />
               </div>
-              <div className="absolute top-[300px] glass p-5 rounded-lg max-w-[250px] border-pink-500 shadow-[0_10px_30px_rgba(255,45,117,0.3)] z-20 text-center">
+              <div className="absolute top-[300px] glass p-5 rounded-lg max-w-[250px] border-pink-500 shadow-[0_10px_30px_-12px_rgb(var(--p-rgb)/0.25)] z-20 text-center">
                 <p className="text-[12px] italic font-bold leading-tight text-white" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}>
                   She Codes. She Conquers. She's Conquering - And She Glows. ✨💗
                 </p>

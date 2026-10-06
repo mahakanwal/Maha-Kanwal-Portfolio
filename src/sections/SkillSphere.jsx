@@ -8,6 +8,7 @@ import Icon from '../components/Icon';
 import useReveal from '../components/useReveal';
 import SkillGlobe from '../three/SkillGlobe';
 import { links } from '../data/portfolio';
+import { useTheme } from '../theme/ThemeContext';
 
 const perks = [
   { icon: 'graduation-cap', title: 'Start From Zero', text: 'Coding from the very basics - no experience needed.' },
@@ -19,6 +20,7 @@ const perks = [
 const steps = ['Message on WhatsApp', 'Get class details', 'Start coding'];
 
 export default function SkillSphere() {
+  const { theme } = useTheme();
   const ref = useRef(null);
   useReveal(ref);
 
@@ -28,7 +30,7 @@ export default function SkillSphere() {
       <LazyMount className="absolute inset-0 z-0 pointer-events-none opacity-80">
         <LightRays
           raysOrigin="top-center"
-          raysColor="#ff3e81"
+          raysColor={theme.p}
           raysSpeed={1.2}
           lightSpread={0.9}
           rayLength={1.6}
@@ -99,7 +101,7 @@ export default function SkillSphere() {
 
           <div className="reveal-3d order-1 lg:order-2 relative aspect-square w-full max-w-[560px] mx-auto">
             <LazyMount className="absolute inset-0">
-              <SkillGlobe />
+              <SkillGlobe key={theme.id} color={theme.p} />
             </LazyMount>
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="relative w-[28%] aspect-square">
@@ -107,14 +109,14 @@ export default function SkillSphere() {
                   <defs>
                     <path id="ss-circle" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" />
                   </defs>
-                  <text fill="#ffb8d1" fontSize="11" letterSpacing="4.2" fontFamily="JetBrains Mono, monospace">
+                  <text fill={theme.s} fontSize="11" letterSpacing="4.2" fontFamily="JetBrains Mono, monospace">
                     <textPath href="#ss-circle">LEARN TOGETHER * GROW TOGETHER * SKILLSPHERE * </textPath>
                   </text>
                 </svg>
                 <img
                   src="/img/skillsphere-icon.png"
                   alt=""
-                  className="relative w-full h-full object-contain drop-shadow-[0_0_25px_rgba(255,62,129,0.8)] animate-[float_6s_ease-in-out_infinite]"
+                  className="relative w-full h-full object-contain drop-shadow-[0_0_14px_rgb(var(--p-rgb)/0.35)] animate-[float_6s_ease-in-out_infinite]"
                 />
               </div>
             </div>

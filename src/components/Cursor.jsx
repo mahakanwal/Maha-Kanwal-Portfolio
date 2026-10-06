@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { currentTheme, hexToRgb01 } from '../theme/themes';
 
-// Clean custom cursor: a small pink dot, a soft trailing ring and a short
+// Clean custom cursor: a small accent dot, a soft trailing ring and a short
 // tapered comet tail that only shows while moving. One subtle ripple on click / tap.
 export default function Cursor() {
   const dotRef = useRef(null);
@@ -48,7 +49,7 @@ export default function Cursor() {
 
       for (let i = 0; i < 10; i++) {
         const s = 3 + Math.random() * 5;
-        const dot = add('burst-dot', { width: `${s}px`, height: `${s}px`, background: ['#ff3e81', '#ffb8d1', '#ffffff', '#ff7eb3'][i % 4] });
+        const dot = add('burst-dot', { width: `${s}px`, height: `${s}px`, background: [currentTheme().p, currentTheme().s, '#ffffff', currentTheme().p300][i % 4] });
         const ang = (Math.PI * 2 * i) / 10 + Math.random() * 0.5;
         const d = 40 + Math.random() * 50;
         gsap.to(dot, {
@@ -152,9 +153,13 @@ export default function Cursor() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (!reduced && trail.length > 2) {
         ctx.lineCap = 'round';
+        // tail fades from the main accent to the soft accent of the active theme
+        const a = hexToRgb01(currentTheme().p);
+        const b = hexToRgb01(currentTheme().s);
         for (let i = 1; i < trail.length; i++) {
           const t = 1 - i / trail.length;
-          ctx.strokeStyle = `rgba(255, ${62 + (1 - t) * 120}, ${129 + (1 - t) * 80}, ${t * 0.55})`;
+          const mix = k => Math.round((a[k] + (b[k] - a[k]) * (1 - t)) * 255);
+          ctx.strokeStyle = `rgba(${mix(0)}, ${mix(1)}, ${mix(2)}, ${t * 0.45})`;
           ctx.lineWidth = Math.max(0.5, t * 6);
           ctx.beginPath();
           ctx.moveTo(trail[i - 1].x, trail[i - 1].y);

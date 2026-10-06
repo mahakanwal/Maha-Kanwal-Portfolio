@@ -9,11 +9,13 @@ import ContactNudge from '../components/ContactNudge';
 import Icon from '../components/Icon';
 import useReveal from '../components/useReveal';
 import { profile } from '../data/portfolio';
+import { useTheme } from '../theme/ThemeContext';
 
 const topics = ['Freelance Project', 'Job Opportunity', 'SkillSphere Enrollment', 'Collaboration', 'Just Saying Hi'];
 const MAX = 600;
 
 export default function Contact() {
+  const { theme } = useTheme();
   const ref = useRef(null);
   const interactedRef = useRef(false);
   useReveal(ref);
@@ -65,10 +67,11 @@ export default function Contact() {
       {/* React Bits: Particles background */}
       <LazyMount className="absolute inset-0 z-0 pointer-events-none opacity-70">
         <Particles
+          key={theme.id}
           particleCount={180}
           particleSpread={10}
           speed={0.08}
-          particleColors={['#ff3e81', '#ffb8d1', '#ffffff']}
+          particleColors={[theme.p, theme.s, '#ffffff']}
           alphaParticles
           particleBaseSize={90}
           sizeRandomness={1}
@@ -98,7 +101,7 @@ export default function Contact() {
 
                 <div className="relative w-full max-w-[420px] aspect-square mx-auto -my-4">
                   <LazyMount className="absolute inset-0" rootMargin="100px">
-                    <Orb hue={0} hoverIntensity={0.35} rotateOnHover backgroundColor="#0a0a0a" />
+                    <Orb colors={[theme.p, theme.s, theme.deep]} hue={0} hoverIntensity={0.35} rotateOnHover backgroundColor="#0a0a0a" />
                   </LazyMount>
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
                     <p className="text-[12px] uppercase tracking-[0.35em] text-mahiPink">Hey There!</p>
