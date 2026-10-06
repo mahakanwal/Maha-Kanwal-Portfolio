@@ -4,49 +4,130 @@ import { gsap } from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Original "zuu zuu" sound + chat bubble: if a visitor reaches the contact
-// section and scrolls back up without typing anything, the page calls them back.
-const SOUND_URL = 'https://www.soundjay.com/buttons/sounds/button-20.mp3';
+// If a visitor reaches the contact section and scrolls back up without
+// interacting, the page plays a short horror sting and shows a chat bubble.
 const LINES = ['WAIT HUMAN...', "LET'S TALK FIRST?", 'CONNECTION LOST?'];
 
-// fallback "zuu zuu" made with Web Audio if the mp3 cannot load
-function synthZuu() {
+// Put your horror mp3 here. Best: download one and save it as public/horror.mp3, then use '/horror.mp3'.
+// You can also paste any direct .mp3 link. If it fails to load, the built-in synth sound plays instead.
+const SOUND_URL = '/horror.mp3';
+
+// One shared AudioContext (browsers only let it start after a user gesture)
+let sharedCtx = null;
+const getCtx = () => {
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!sharedCtx) sharedCtx = new Ctx();
+  return sharedCtx;
+};
+
+// Horror sting (~2.5s), fully synthesized so there is no mp3 to load:
+// heartbeat thumps + low detuned drone + tritone screech with vibrato + noise whoosh
+function horrorSound() {
   try {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return;
-    const ctx = new Ctx();
-    [0, 0.22].forEach(offset => {
+    const ctx = getCtx();
+    if (!ctx) return;
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const t0 = ctx.currentTime + 0.02;
+    const master = ctx.createGain();
+    master.gain.value = 0.5; // overall volume: lower this if it is too loud
+    const comp = ctx.createDynamicsCompressor();
+    master.connect(comp).connect(ctx.destination);
+
+    const env = (g, t, peak, attack, release) => {
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(peak, t + attack);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + attack + release);
+    };
+
+    // 1. heartbeat: two "lub-dub" pairs
+    [0, 0.28, 0.95, 1.23].forEach(off => {
       const o = ctx.createOscillator();
       const g = ctx.createGain();
-      o.type = 'sawtooth';
-      o.frequency.setValueAtTime(420, ctx.currentTime + offset);
-      o.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + offset + 0.18);
-      g.gain.setValueAtTime(0.0001, ctx.currentTime + offset);
-      g.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + offset + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + offset + 0.2);
-      o.connect(g).connect(ctx.destination);
-      o.start(ctx.currentTime + offset);
-      o.stop(ctx.currentTime + offset + 0.22);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(90, t0 + off);
+      o.frequency.exponentialRampToValueAtTime(38, t0 + off + 0.18);
+      env(g, t0 + off, 0.9, 0.01, 0.22);
+      o.connect(g).connect(master);
+      o.start(t0 + off);
+      o.stop(t0 + off + 0.3);
     });
-    setTimeout(() => ctx.close(), 800);
+
+    // 2. low drone: detuned saws, filter slowly opens
+    const lp = ctx.createBiquadFilter();
+    lp.type = 'lowpass';
+    lp.frequency.setValueAtTime(180, t0);
+    lp.frequency.exponentialRampToValueAtTime(900, t0 + 2);
+    const drone = ctx.createGain();
+    env(drone, t0, 0.3, 1.2, 1.3);
+    lp.connect(drone).connect(master);
+    [55, 58.3, 82.4].forEach(f => {
+      const o = ctx.createOscillator();
+      o.type = 'sawtooth';
+      o.frequency.value = f;
+      o.connect(lp);
+      o.start(t0);
+      o.stop(t0 + 2.6);
+    });
+
+    // 3. screech stab: two notes a tritone apart, wobbling and sliding down
+    const st = t0 + 0.55;
+    [1244.5, 1760].forEach(f => {
+      const o = ctx.createOscillator();
+      const g = ctx.createGain();
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      o.type = 'sawtooth';
+      o.frequency.setValueAtTime(f, st);
+      o.frequency.exponentialRampToValueAtTime(f * 0.6, st + 1.4);
+      lfo.frequency.value = 9;
+      lfoGain.gain.value = 45;
+      lfo.connect(lfoGain).connect(o.frequency);
+      env(g, st, 0.12, 0.03, 1.2);
+      o.connect(g).connect(master);
+      o.start(st);
+      lfo.start(st);
+      o.stop(st + 1.5);
+      lfo.stop(st + 1.5);
+    });
+
+    // 4. noise whoosh
+    const len = Math.floor(ctx.sampleRate * 2);
+    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+    const noise = ctx.createBufferSource();
+    noise.buffer = buf;
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.Q.value = 1.5;
+    bp.frequency.setValueAtTime(300, t0);
+    bp.frequency.exponentialRampToValueAtTime(3000, t0 + 1.2);
+    const ng = ctx.createGain();
+    env(ng, t0, 0.18, 0.9, 1.0);
+    noise.connect(bp).connect(ng).connect(master);
+    noise.start(t0);
+    noise.stop(t0 + 2);
   } catch {
     /* audio not available */
   }
 }
 
 export default function ContactNudge({ interactedRef }) {
-  const audioRef = useRef(null);
   const bubbleRef = useRef(null);
   const [text, setText] = useState('');
 
   useEffect(() => {
     const audio = new Audio(SOUND_URL);
     audio.preload = 'auto';
-    audio.volume = 0.3;
-    audioRef.current = audio;
+    audio.volume = 0.6;
 
-    // browsers only allow sound after the first interaction - unlock it then
+    // unlock audio on the first real user gesture
+    const events = ['pointerdown', 'keydown', 'touchstart'];
     const unlock = () => {
+      const ctx = getCtx();
+      if (ctx && ctx.state === 'suspended') ctx.resume();
       audio
         .play()
         .then(() => {
@@ -54,8 +135,9 @@ export default function ContactNudge({ interactedRef }) {
           audio.currentTime = 0;
         })
         .catch(() => {});
+      events.forEach(e => document.removeEventListener(e, unlock));
     };
-    document.addEventListener('click', unlock, { once: true });
+    events.forEach(e => document.addEventListener(e, unlock));
 
     let played = false;
     let timers = [];
@@ -107,7 +189,7 @@ export default function ContactNudge({ interactedRef }) {
         if (interactedRef.current || played) return;
         played = true;
         audio.currentTime = 0;
-        audio.play().catch(synthZuu);
+        audio.play().catch(horrorSound);
         gsap.to(bubbleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' });
         typeLines();
       }
@@ -116,7 +198,7 @@ export default function ContactNudge({ interactedRef }) {
     return () => {
       st.kill();
       clear();
-      document.removeEventListener('click', unlock);
+      events.forEach(e => document.removeEventListener(e, unlock));
       audio.pause();
     };
   }, [interactedRef]);
