@@ -16,7 +16,7 @@ export default function Footer() {
         <Logo size={44} />
 
         <p className="text-xl sm:text-2xl font-bold text-white max-w-xl leading-snug">
-          Coded with chai, debugged with patience and powered by <span className="text-mahiPink">Humnava</span> on repeat.
+          Coded with chai, debugged with patience and powered by <span className="text-mahiPink">Kahani Meri</span> on repeat.
         </p>
         <p className="text-xs text-white/50 max-w-md leading-relaxed">
           Thanks for playing through my portfolio. Your next quest: say hi, hire me, or beat my Bug Hunter score.
