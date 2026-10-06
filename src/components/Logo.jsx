@@ -1,0 +1,20 @@
+// MK logo inlined as SVG so it always renders (no extra image request).
+export default function Logo({ size = 30, className = '', color = '#ffffff' }) {
+  return (
+    <svg
+      width={size}
+      height={Math.round((size * 285) / 439)}
+      viewBox="0 0 439 285"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      role="img"
+      aria-label="Maha Kanwal logo"
+    >
+      <path
+        d="M14.4355 0.5L14.5811 0.643555L128.447 112.637L184.702 57.2891L242.305 0.643555L242.45 0.5H258.221V70.6348L258.071 70.7812L197.523 130.333L169.562 157.827L128.816 197.903L128.466 198.248L128.115 197.903L120.093 190.021L109.021 179.141L105.692 175.866V175.867L93.3203 163.706H93.3193L62.0566 132.956V283.879H0.5V0.5H14.4355ZM438.422 0.5L437.556 1.35547L383.324 54.917L383.323 54.918L260.574 175.655L369.133 282.421L370.004 283.277H282.926L282.78 283.134L217.034 218.478L190.404 244.671V283.277H128.857V219.689L129.007 219.543L226.104 124.052L226.042 123.993L226.41 123.631L351.226 0.643555L351.372 0.5H438.422Z"
+        fill={color}
+      />
+    </svg>
+  );
+}
