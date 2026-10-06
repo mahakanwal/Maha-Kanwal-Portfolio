@@ -48,7 +48,7 @@ export default function About() {
               </div>
               <div className="absolute top-[300px] glass p-5 rounded-lg max-w-[250px] border-pink-500 shadow-[0_10px_30px_rgba(255,45,117,0.3)] z-20 text-center">
                 <p className="text-[12px] italic font-bold leading-tight text-white" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.6)' }}>
-                  She Codes. She Conquers. She's Conquering - And She Glows.
+                  She Codes. She Conquers. She's Conquering - And She Glows. ✨💗
                 </p>
               </div>
             </div>

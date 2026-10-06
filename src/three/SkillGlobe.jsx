@@ -17,7 +17,7 @@ export default function SkillGlobe({ color = '#ff3e81', className = '' }) {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    camera.position.set(0, 0, 7.4);
+    camera.position.set(0, 0, 9.5);
 
     const group = new THREE.Group();
     scene.add(group);

@@ -264,12 +264,12 @@ export const creativeSides = [
 // `text` is the caption shown under each photo in the 3D gallery.
 // ---------------------------------------------------------------
 export const galleryItems = [
-  { image: '/img/gallery/office-mode.webp', text: 'Office Mode' },
-  { image: '/img/gallery/moment-01.webp', text: 'Add A Moment' },
-  { image: '/img/gallery/teacher-mode.webp', text: 'Teacher Mode' },
-  { image: '/img/gallery/moment-02.webp', text: 'Add A Moment' },
-  { image: '/img/gallery/moment-03.webp', text: 'Add A Moment' },
-  { image: '/img/gallery/moment-04.webp', text: 'Add A Moment' },
-  { image: '/img/gallery/moment-05.webp', text: 'Add A Moment' },
-  { image: '/img/gallery/moment-06.webp', text: 'Add A Moment' }
+  { image: '/img/gallery/office_desk_hr.jpeg', text: 'Office Mode' },
+  { image: '/img/gallery/innovalte1.jpeg', text: 'Innovalte Season 2 - 1st Runner Up' },
+  { image: '/img/gallery/techwiz7.jpeg', text: 'Techwiz 7' },
+  { image: '/img/gallery/innovalte2.jpeg', text: 'Winning Prize' },
+  { image: '/img/gallery/first_tech_exhibition.jpeg', text: 'First Software Exhibition' },
+  { image: '/img/gallery/coding.jpeg', text: 'Coding Mode On' },
+  { image: '/img/gallery/pc_vision.jpeg', text: 'At Vision' },
+  { image: '/img/gallery/vision1.jpeg', text: 'With My SkillSync' }
 ];

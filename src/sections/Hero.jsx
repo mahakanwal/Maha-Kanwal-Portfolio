@@ -56,7 +56,7 @@ export default function Hero() {
                 text="MAHA"
                 fontWeight={700}
                 fontSize={400}
-                letterSpacing={-0.05}
+                letterSpacing={0.01}
                 color="#ffffff"
                 accentColor="#ff3e81"
                 reach={180}

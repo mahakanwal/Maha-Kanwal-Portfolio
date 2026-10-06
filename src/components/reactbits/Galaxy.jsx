@@ -1,4 +1,3 @@
-
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import { useEffect, useRef } from 'react';
 
@@ -39,7 +38,7 @@ uniform float uLightMode;
 
 varying vec2 vUv;
 
-#define NUM_LAYER 4.0
+#define NUM_LAYER 3.0
 #define STAR_COLOR_CUTOFF 0.2
 #define MAT45 mat2(0.7071, -0.7071, 0.7071, 0.7071)
 #define PERIOD 3.0
@@ -119,7 +118,8 @@ vec3 StarLayer(vec2 uv) {
       twinkle = mix(1.0, twinkle, uTwinkleIntensity);
       star *= twinkle;
       
-      col += star * size * color;
+      // reduced: dim/small stars are dropped, only bigger ones remain
+      col += star * size * color * smoothstep(0.25, 0.7, size);
     }
   }
 
@@ -169,7 +169,7 @@ void main() {
     gl_FragColor = vec4(mix(vec3(1.0), ink, coverage), 1.0);
   } else if (uTransparent) {
     float alpha = length(col);
-    alpha = smoothstep(0.0, 0.3, alpha);
+    alpha = smoothstep(0.12, 0.6, alpha);
     alpha = min(alpha, 1.0);
     gl_FragColor = vec4(col, alpha);
   } else {
@@ -182,16 +182,16 @@ export default function Galaxy({
   focal = [0.5, 0.5],
   rotation = [1.0, 0.0],
   starSpeed = 0.5,
-  density = 1,
+  density = 0.5,
   hueShift = 140,
   disableAnimation = false,
   speed = 1.0,
   mouseInteraction = true,
-  glowIntensity = 0.3,
+  glowIntensity = 0.12,
   saturation = 0.0,
   mouseRepulsion = true,
   repulsionStrength = 2,
-  twinkleIntensity = 0.3,
+  twinkleIntensity = 0.2,
   rotationSpeed = 0.1,
   autoCenterRepulsion = 0,
   transparent = true,
