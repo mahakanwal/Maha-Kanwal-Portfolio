@@ -178,7 +178,7 @@ export const projects = [
     tagline: 'AI-Powered Mood-Based Content & Product Recommender.',
     tags: ['AI', 'Recommendation', '#Feel_Your_Mood'],
     image: '/img/moodbuddy.webp',
-    live: null, // TODO
+    live: 'https://moodbuddy-cng3.onrender.com/', 
     github: null // TODO
   },
   {
