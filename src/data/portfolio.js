@@ -159,7 +159,7 @@ export const projects = [
     image: null,
     cover: { accent: 'var(--p)', glyph: 'AI' },
     live: 'https://skill-sprint-omega-six.vercel.app/',
-    github: null // TODO: add GitHub repo link
+    github: 'https://github.com/mahakanwal/SkillSprint' 
   },
   {
     title: 'SkillSync',
