@@ -179,7 +179,7 @@ export const projects = [
     tags: ['AI', 'Recommendation', '#Feel_Your_Mood'],
     image: '/img/moodbuddy.webp',
     live: 'https://moodbuddy-cng3.onrender.com/', 
-    github: null // TODO
+    github: 'https://github.com/mahakanwal/moodbuddy-app'
   },
   {
     title: 'Netpositive',
@@ -187,8 +187,8 @@ export const projects = [
     tagline: 'Eco-Friendly Essentials & Sustainable Online Store.',
     tags: ['E-commerce', 'Responsive UI'],
     image: '/img/netpositive.webp',
-    live: null, // TODO
-    github: null // TODO
+    live: 'https://netpositive.com/', 
+    github: null 
   },
   {
     title: 'Wellnex Systems',
@@ -203,10 +203,10 @@ export const projects = [
     title: 'Mahi OS',
     category: 'frontend',
     tagline: 'The original personal portfolio - #Active_Portfolio.',
-    tags: ['Portfolio', 'GSAP', 'Tailwind'],
+    tags: ['Portfolio', 'React JS', 'Three Js'],
     image: '/img/mahi.webp',
-    live: null, // TODO
-    github: null // TODO
+    live: 'https://meet-maha.vercel.app/', 
+    github: 'https://github.com/mahakanwal/Maha-Kanwal-Portfolio' 
   },
   {
     title: 'Chat App',
