@@ -156,8 +156,8 @@ export const projects = [
     category: 'ai',
     tagline: 'Generative-AI onboarding platform that turns a role into a personalised learning sprint.',
     tags: ['React', 'FastAPI', 'PostgreSQL', 'Groq GenAI'],
-    image: null,
-    cover: { accent: 'var(--p)', glyph: 'AI' },
+    image: '/img/skillsprint.png',
+    // cover: { accent: 'var(--p)', glyph: 'AI' },
     live: 'https://skill-sprint-omega-six.vercel.app/',
     github: 'https://github.com/mahakanwal/SkillSprint' 
   },
