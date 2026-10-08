@@ -191,14 +191,14 @@ export const projects = [
     github: null 
   },
   {
-    title: 'Wellnex Systems',
-    category: 'frontend',
-    tagline: 'Wellness Reimagined for the Next Generation.',
-    tags: ['Landing Page', 'UI Design'],
-    image: '/img/wellnex.webp',
-    live: null, // TODO
-    github: null // TODO
-  },
+  title: 'Trade With Badami',
+  category: 'frontend',
+  tagline: 'Smart Trading, Simplified for Every Trader.',
+  tags: ['Trading Website', 'UI Design'],
+  image: '/img/tradewithbadami.png',
+  live: 'https://tradewithbadami.com/',
+  github: 'https://github.com/mahakanwal/Tradewithbadami'
+},
   {
     title: 'Mahi OS',
     category: 'frontend',
